@@ -1,0 +1,8 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<AppSettings>
+  <Server>ALI-PC\SQLR2</Server>
+  <DBName>dbFS</DBName>
+  <DBUser>sa</DBUser>
+  <DBPassword>RBRM9ViyV9Dc5FFvHzawGQ==</DBPassword>
+  <DBAuthentication>Windows</DBAuthentication>
+</AppSettings>

@@ -1,0 +1,145 @@
+using System;
+using System.Data;
+using System.Xml;
+using System.IO;
+using Spire.Doc;
+using Spire.Doc.Documents;
+using System.Drawing;
+using Spire.Doc.Fields;
+using Spire.Doc.Collections;
+using System.Text;
+
+public partial class Forms_frmTest : System.Web.UI.Page
+{
+    protected void Page_Load(object sender, EventArgs e)
+    {
+        /*
+        StringBuilder strBody = new StringBuilder();
+        string siteURL = "http://localhost:4777/FastServices/images/Letterhead.gif"; //Put your Image path
+
+        strBody.Append("<!DOCTYPE html PUBLIC '-//W3C//DTD XHTML 1.0 Transitional//EN' 'http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd'>");
+
+        strBody.Append("<html xmlns:v='urn:schemas-microsoft-com:vml' xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>");
+
+        strBody.Append("<head>");
+        strBody.Append("<title>Report</title>");
+        strBody.Append("<meta http-equiv='Content-Type' content='text/html; charset=utf-8'/><meta name=ProgId content=Word.Document><meta name=Generator content=\"Microsoft Word 11\"><meta name=Originator content=\"Microsoft Word 11\">");
+
+        strBody.Append("<!--[if gte mso 9]><xml><w:WordDocument><w:View>Print</w:View></w:WordDocument></xml><![endif]-->");
+
+        strBody.Append("<!--[if !mso]><style>v\\:* {behavior:url(#default#VML); position: relative;display:inline-block}</style><![endif]-->");
+
+        strBody.Append("<style>");
+        strBody.Append("@page Section1 {size:8.5in 11.0in;margin:0.8in 0.6in 1in 0.4in; mso-header-margin:.5in; mso-footer-margin:.3in; mso-paper-source:0;mso-title-page:yes;}");
+
+        strBody.Append("p.MsoFooter, li.MsoFooter, div.MsoFooter {margin:0in; margin-bottom:.0001pt; mso-pagination:widow-orphan;font-size:10pt;font-family:Arial;}");
+
+        strBody.Append("p.MsoHeader, li.MsoHeader, div.MsoHeader {margin:0in;margin-bottom:.0001pt; mso-pagination:widow-orphan;tab-stops:center 3.0in right 6.0in;}");
+
+        strBody.Append("div.Section1{page:Section1;font-size:10pt;font-family:Arial}");
+        strBody.Append("</style>");
+        strBody.Append("</head>");
+
+        strBody.Append("<body bgcolor=white lang=EN-US style=\"tab-interval:.5in\" background='" + siteURL + "'>");
+
+        strBody.Append("<!--[if gte mso 9]><xml><v:background id=\"_x0000_s1025\" o:bwmode=\"white\" o:targetscreensize=\"800,600\"><v:fill o:HRef='" + siteURL + "' o:title=\"BGImage\" type=\"frame\"/></v:background></xml><![endif]-->");
+
+        strBody.Append("<div class=Section1>");
+        strBody.Append("<img src='" + siteURL + "' width='500' height='500'>");
+        strBody.Append("<br><br><br>ADD BACKGROUNG IMAGE IN WORD FILE USING HTML TEXT");
+        strBody.Append("</div>");
+        strBody.Append("</body>");
+        strBody.Append("</html>");
+
+        Response.AppendHeader("Content-Type", "application/msword");
+        Response.AppendHeader("Content-disposition", "attachment; filename=Report.doc");
+        Response.Write(strBody);
+         */
+    }
+
+    protected void btnShow_Click(object sender, EventArgs e)
+    {    
+        /*
+        //Create word document    
+        Document document = new Document();
+        InsertHeaderFooter(document);
+
+        //Save doc file.    
+        document.SaveToFile(@"C:\\MyApps\\Letterhead.docx", FileFormat.Docx);
+
+        //Launching the MS Word file.   
+        WordDocViewer(@"C:\\MyApps\\Letterhead.docx");
+        
+        */
+
+        Response.ContentType = "application/msword";
+        Response.ContentEncoding = System.Text.UnicodeEncoding.UTF8;
+        Response.Charset = "UTF-8";
+        Response.AppendHeader("Content-disposition", "attachment; filename=" + "Proposal for " + "-" + System.DateTime.Now.ToString("dd-MM-yyyy") + ".doc");
+        StringBuilder str = new StringBuilder();
+        str.Append("<html xmlns:o='urn:schemas-microsoft-com:office:office' xmlns:w='urn:schemas-microsoft-com:office:word' xmlns='http://www.w3.org/TR/REC-html40'>");
+        str.Append("<head>");
+        str.Append("<!--[if gte mso 9]> <xml> <w:WordDocument> <w:View>Print</w:View> <w:Zoom>100</w:Zoom> <w:DoNotOptimizeForBrowser/> </w:WordDocument> </xml> <![endif]-->");
+        str.Append("<META HTTP-EQUIV=\"Content-Type\" CONTENT=\"\"text/html; charset=UTF-8\"\">");
+        str.Append("<meta name=ProgId content=Word.Document>");
+        str.Append("<meta name=Generator content=\"Microsoft Word 9\">");
+        str.Append("<meta name=Originator content=\"Microsoft Word 9\">");
+        str.Append("</head>");
+        str.Append("<body>");
+        str.Append("<div class=Section2>");
+
+        // write some content here
+
+        str.Append("</body>");
+        str.Append("</html>");
+
+        Response.Write(str.ToString());
+        
+    }
+
+    private void InsertHeaderFooter(Document document)
+    {
+        Document doc = new Document();
+        doc.LoadFromFile(@"C:\\MyApps\\Letterhead.docx", FileFormat.Docx);
+
+        Section section = document.AddSection();
+        Paragraph paragraph = section.AddParagraph();
+        paragraph.AppendText("Test Paragraph");
+        section.Paragraphs.Add(paragraph);
+                
+
+        //Section section = document.AddSection();
+        //Paragraph paragraph = section.AddParagraph();
+         
+        //paragraph.AppendText("The sample demonstrates how to insert a header and footer into a document.");
+        //paragraph.ApplyStyle(BuiltinStyle.Heading2);
+        //paragraph = section.AddParagraph();
+        //paragraph.AppendText("Microsoft Word is a word processor designed by Microsoft. It was first released in 1983 under the name Multi-Tool Word for Xenix systems. Subsequent versions were later written for several other platforms including IBM PCs running DOS (1983), the Apple Macintosh (1984), the AT&T Unix PC (1985), Atari ST (1986), SCO UNIX, OS/2, and Microsoft Windows (1989).");
+        //section.Paragraphs.Add(paragraph)
+        //section.PageSetup.DifferentFirstPageHeaderFooter = true;
+        //paragraph = new Paragraph(document);
+
+        //Image logo = Image.FromFile(@"C:\MyApps\Header.PNG");
+        //paragraph.AppendPicture(logo);
+        
+        //paragraph.AppendText("Header Text").CharacterFormat.FontSize = 15;
+        //paragraph.Format.HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment.Center;
+        //section.HeadersFooters.Header.Paragraphs.Add(paragraph);
+        /*
+        paragraph = new Paragraph(document);
+        paragraph.AppendText("Fast Services. 2002-2012 All rights reserverd").CharacterFormat.FontSize = 15;
+        paragraph.Format.HorizontalAlignment = Spire.Doc.Documents.HorizontalAlignment.Center;
+        section.HeadersFooters.Header.Paragraphs.Add(paragraph);
+        */
+         
+    }
+
+    private void WordDocViewer(string fileName)
+    {
+        try
+        {
+            System.Diagnostics.Process.Start(fileName);
+        }
+        catch { }
+    }
+}
